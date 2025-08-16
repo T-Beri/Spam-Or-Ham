@@ -6,6 +6,8 @@ from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 import os
 import pickle
+nltk.download('punkt', quiet=True)
+nltk.download('stopwords', quiet=True)
 
 # Initialize stemmer
 ps = PorterStemmer()
