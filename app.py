@@ -4,6 +4,8 @@ import string
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
+import os
+import pickle
 
 # Initialize stemmer
 ps = PorterStemmer()
@@ -33,16 +35,26 @@ def transform_text(text):
 
     return " ".join(y)
 
-# Load vectorizer & model
-tfidf = pickle.load(open("vectorizer.pkl", "rb"))
-model = pickle.load(open("model.pkl", "rb"))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+# Load the vectorizer
+vectorizer_path = os.path.join(BASE_DIR, "vectorizer.pkl")
+with open(vectorizer_path, "rb") as f:
+    tfidf = pickle.load(f)
+
+# Load the trained model
+model_path = os.path.join(BASE_DIR, "model.pkl")
+with open(model_path, "rb") as f:
+    model = pickle.load(f)
+
 
 # Streamlit UI
 st.title("📩 SMS Spam Detection")
 
 input_sms = st.text_area("Enter your message")
 
-if st.button("Predict"):   # 👈 only run when button clicked
+if st.button("Predict"):   # only run when button clicked
     # 1. Preprocess
     transformed_sms = transform_text(input_sms)
 
