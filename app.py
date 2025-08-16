@@ -1,5 +1,5 @@
 import streamlit as st
-import pickle
+
 import string
 import nltk
 from nltk.corpus import stopwords
@@ -13,6 +13,7 @@ if not os.path.exists(nltk_data_path):
 
 nltk.download('punkt', download_dir=nltk_data_path)
 nltk.download('stopwords', download_dir=nltk_data_path)
+nltk.download("punkt_tab", download_dir=nltk_data_path)
 
 nltk.data.path.append(nltk_data_path)
 
